@@ -23,3 +23,14 @@ export const getAllTodos=async(req,res)=>{
         res.status(500).json(err.message);
     }
 }
+
+export const toggleTodo=async(req,res)=>{
+    try {
+        const todo=await Todo.find({_id:req.params.id});
+        todo[0].done=!todo[0].done;
+        await todo[0].save();
+        res.status(200).json(todo);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}

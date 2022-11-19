@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { getAllTodos } from '../redux/actions/index';
 import { useDispatch,useSelector } from 'react-redux';
 import Todo from './Todo';
@@ -7,6 +7,8 @@ import Todo from './Todo';
 const Todos = () => {
 
     const dispatch=useDispatch();
+
+    const [col,setCol]=useState(0);
 
     const todos=useSelector(state=>state.todos);
 
@@ -19,7 +21,7 @@ const Todos = () => {
         <ul>
             {
                 todos&&todos.map(el=>(
-                    <Todo data={el.data} key={el._id}/>
+                    <Todo data={el} key={el._id} setCol={setCol} col={col}/>
                 ))
             }
         </ul>
