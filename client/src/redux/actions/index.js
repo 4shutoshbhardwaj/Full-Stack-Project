@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_NEW_TODO,GET_ALL_TODOS,TOGGLE_TODO } from './types';
+import { ADD_NEW_TODO,GET_ALL_TODOS,TOGGLE_TODO,UPDATE_TODO } from './types';
 
 const api_url=`http://localhost:8000`;
 
@@ -30,5 +30,25 @@ export const toggleTodo=(id)=>async(dispatch)=>{
 
     } catch (err) {
         console.log("error while calling toggleTodo API"+err.message);
+    }
+}
+
+export const updateTodo=(id,data)=>async(dispatch)=>{
+    try {
+        const res=await axios.put(`${api_url}/todos/${id}`,{data});
+        dispatch({type:UPDATE_TODO,payload:res.data});
+
+    } catch (err) {
+        console.log("error while calling updateTodo API"+err.message);
+    }
+}
+
+export const deleteTodo=(id)=>async(dispatch)=>{
+    try {
+        const res=await axios.delete(`${api_url}/todos/${id}`);
+        dispatch({type:UPDATE_TODO,payload:res.data});
+
+    } catch (err) {
+        console.log("error while calling updateTodo API"+err.message);
     }
 }

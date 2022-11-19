@@ -8,8 +8,6 @@ const Todos = () => {
 
     const dispatch=useDispatch();
 
-    const [col,setCol]=useState(0);
-
     const todos=useSelector(state=>state.todos);
 
     useEffect(()=>{
@@ -21,7 +19,7 @@ const Todos = () => {
         <ul>
             {
                 todos&&todos.map(el=>(
-                    <Todo data={el} key={el._id} setCol={setCol} col={col}/>
+                    <Todo data={el} key={el._id} />
                 ))
             }
         </ul>

@@ -34,3 +34,25 @@ export const toggleTodo=async(req,res)=>{
         res.status(500).json(err.message);
     }
 }
+
+export const updateTodo=async(req,res)=>{
+    try {
+        const todo=await Todo.find({_id:req.params.id});
+        todo[0].data=req.body.data;
+        await todo[0].save();
+        const savedTodo=await Todo.find({_id:req.params.id});
+        console.log(savedTodo[0]);
+        res.status(200).json(savedTodo[0]);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+export const deleteTodo=async(req,res)=>{
+    try {
+        const todoList=await Todo.deleteOne({_id:req.params.id});
+        res.status(200).json(todoList);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
